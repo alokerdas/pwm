@@ -1,4 +1,8 @@
 module pwm (
+`ifdef USE_POWER_PINS
+  inout vccd1,
+  inout vssd1,
+`endif
   input clkin,
   input reset,
   input cs,
@@ -6,13 +10,22 @@ module pwm (
   output clkout
 );
 
-  reg [2:0] uptimelat;
-  reg [2:0] uptimereg;
-  reg [2:0] countreg;
+  reg [2:0] uptimelat, uptimereg, countreg;
+  wire count1, uptime1;
 
+  /*
   always_latch begin
     if (cs || reset) begin
       uptimelat = uptime;
+    end
+  end
+  */
+
+  always @(posedge clkin or posedge reset) begin
+    if (reset) begin
+      uptimelat <= 3'h0;
+    end else if (cs) begin
+      uptimelat <= uptime;
     end
   end
 

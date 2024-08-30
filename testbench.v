@@ -17,9 +17,9 @@ module testbench;
     #50 upt = 3'h1;
     #5 en = 1; #5 en = 0;
     #1000 upt = 3'h2;
-    #5 en = 1; #5 en = 0;
+    #5 en = 1; #15 en = 0;
     #1000 upt = 3'h3;
-    #5 en = 1; #5 en = 0;
+    #5 en = 1; #15 en = 0;
     #1000 $finish;
   end 
 
